@@ -2,6 +2,7 @@ package org.malshan.springbootapp.topic;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,12 +13,12 @@ import java.util.List;
 
 @Service    // Stereotype annotation as a Service class
 public class TopicService {
-    private List<Topic> topics = Arrays.asList(
+    private List<Topic> topics = new ArrayList<>(Arrays.asList(
 //            new Topic(),    // TODO: Must handle the situation where there's a null object
             new Topic("1", "Spring Framework 1", "Spring Framework Description 1"),
             new Topic("2", "Spring Framework 2", "Spring Framework Description 2"),
             new Topic("3", "Spring Framework 3", "Spring Framework Description 3")
-    );
+    ));
 
     public List<Topic> getAllTopics() {
         return topics;
@@ -26,5 +27,9 @@ public class TopicService {
     public Topic getTopic(String Id) {
         Topic topic = topics.stream().filter(t -> t.getId().equals(Id)).findFirst().get();
         return topic;
+    }
+
+    public void addTopic(Topic topic) {
+        topics.add(topic);
     }
 }
