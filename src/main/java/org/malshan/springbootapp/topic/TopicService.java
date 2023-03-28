@@ -13,7 +13,7 @@ import java.util.List;
 @Service    // Stereotype annotation as a Service class
 public class TopicService {
     private List<Topic> topics = Arrays.asList(
-            new Topic(),
+//            new Topic(),    // TODO: Must handle the situation where there's a null object
             new Topic("1", "Spring Framework 1", "Spring Framework Description 1"),
             new Topic("2", "Spring Framework 2", "Spring Framework Description 2"),
             new Topic("3", "Spring Framework 3", "Spring Framework Description 3")
@@ -21,5 +21,10 @@ public class TopicService {
 
     public List<Topic> getAllTopics() {
         return topics;
+    }
+
+    public Topic getTopic(String Id) {
+        Topic topic = topics.stream().filter(t -> t.getId().equals(Id)).findFirst().get();
+        return topic;
     }
 }
